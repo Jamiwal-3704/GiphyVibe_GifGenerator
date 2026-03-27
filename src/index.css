@@ -2,27 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
-/* css background-image generated using https://10015.io/tools/css-background-pattern-generator */
-.background {
-  background-image: radial-gradient(#ffffff 2.5px, transparent 2.5px), radial-gradient(#ffffff 2.5px, transparent 2.5px);
-  background-size: 36px 36px;
-  background-position: 0 0, 18px 18px;
-  background-color: #b1d2ff;
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply font-sans text-slate-100;
+  }
 }
 
+/* Layered gradient + subtle grid — keeps motion-free, readable */
+.background {
+  background-color: #0c0a12;
+  background-image:
+    radial-gradient(ellipse 120% 80% at 50% -20%, rgba(167, 139, 250, 0.22), transparent 50%),
+    radial-gradient(ellipse 90% 60% at 100% 50%, rgba(255, 107, 92, 0.12), transparent 45%),
+    radial-gradient(ellipse 70% 50% at 0% 80%, rgba(34, 211, 238, 0.1), transparent 40%),
+    linear-gradient(180deg, #12101a 0%, #0c0a12 45%, #0a0810 100%);
+  background-attachment: fixed;
+}
 
-/* css loader generated using https://10015.io/tools/css-loader-generator */
+.background::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@layer components {
+  .surface-card {
+    @apply relative w-full max-w-xl overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.04] p-6 shadow-card backdrop-blur-xl sm:p-8;
+  }
+
+  .surface-card::after {
+    content: "";
+    @apply pointer-events-none absolute inset-0 rounded-3xl opacity-40;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.06) 0%,
+      transparent 50%,
+      transparent 100%
+    );
+  }
+
+  .btn-primary-warm {
+    @apply relative w-full max-w-sm overflow-hidden rounded-2xl bg-gradient-to-r from-brand-coral to-orange-500 px-6 py-3.5 font-semibold text-white shadow-glow transition duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:brightness-100;
+  }
+
+  .btn-primary-cool {
+    @apply relative w-full max-w-sm overflow-hidden rounded-2xl bg-gradient-to-r from-cyan-500 to-brand-violet px-6 py-3.5 font-semibold text-white shadow-glow-cyan transition duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:brightness-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:brightness-100;
+  }
+
+  .input-tag {
+    @apply w-full max-w-sm rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-center font-medium text-white placeholder:text-slate-500 shadow-inner transition focus:border-brand-cyan/50 focus:bg-white/[0.07] focus:outline-none focus:ring-2 focus:ring-brand-cyan/30;
+  }
+}
+
+/* Loader tuned for dark UI */
 .spinner {
-   margin: 40px;
-   width: 11.2px;
-   height: 11.2px;
-   animation: spinner-z355kx 1s infinite linear;
-   border-radius: 11.2px;
-   box-shadow: 28px 0px 0 0 #fff, 17.4px 21.8px 0 0 #fff, -6.2px 27.2px 0 0 #fff, -25.2px 12px 0 0 #fff, -25.2px -12px 0 0 #fff, -6.2px -27.2px 0 0 #fff, 17.4px -21.8px 0 0 #fff;
+  margin: 2rem auto;
+  width: 14px;
+  height: 14px;
+  animation: spinner-z355kx 1s infinite linear;
+  border-radius: 14px;
+  box-shadow:
+    32px 0 0 0 #ff6b5c,
+    20px 24px 0 0 #a78bfa,
+    -7px 30px 0 0 #22d3ee,
+    -29px 14px 0 0 #ffb38a,
+    -29px -14px 0 0 #ff6b5c,
+    -7px -30px 0 0 #a78bfa,
+    20px -24px 0 0 #22d3ee;
 }
 
 @keyframes spinner-z355kx {
-   to {
-      transform: rotate(360deg);
-   }
+  to {
+    transform: rotate(360deg);
+  }
 }
