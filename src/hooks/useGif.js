@@ -1,26 +1,27 @@
-
 import axios from "axios";
-import { useEffect, useState } from "react"
-
-
-const API_KEY = process.env.REACT_APP_GIPHY_API_KEY;
-const url = `https://api.giphy.com/v1/gifs/random?api_key=${API_KEY}`;
+import { useEffect, useState } from "react";
 
 function useGif(tag) {
-    const[gif,setGif] = useState("");
-    const[loading,setLoading] = useState('false');
-  
-    async function fetchData(tag){
-        setLoading(true);
-        const {data} = await axios.get(tag ? `${url}&tag=${tag}`: url );
-        const imagesrc = data.data.images.downsized_large.url;
-        setGif(imagesrc);
-        setLoading(false);
+  const [gif, setGif] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function fetchData(tag) {
+    setLoading(true);
+    try {
+      const endpoint = `/api/gifs/random${tag ? `?tag=${encodeURIComponent(tag)}` : ""}`;
+      const { data } = await axios.get(endpoint);
+      const imagesrc = data.data.images.downsized_large.url;
+      setGif(imagesrc);
+    } catch (err) {
+      console.error("fetch gif error", err);
+    } finally {
+      setLoading(false);
     }
-    useEffect( () => {
-        fetchData('car');
-    },[])
-    return{gif,loading,fetchData};
+  }
+  useEffect(() => {
+    fetchData("car");
+  }, []);
+  return { gif, loading, fetchData };
 }
 
-export default useGif
+export default useGif;

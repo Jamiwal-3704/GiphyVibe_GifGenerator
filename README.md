@@ -1,3 +1,103 @@
+# GiphyVibe — Random GIF Generator
+
+> A tiny, fun React app that fetches truly random GIFs from GIPHY. Built for learning, experimenting with modern frontend tooling, and sharing a smile.
+
+## Demo
+
+- Click "Generate random GIF" to fetch a fresh GIF from GIPHY.
+
+## Built with
+
+- React 18.2
+- Tailwind CSS
+- axios
+- Create React App (react-scripts)
+- GIPHY API
+
+## Features
+
+- Pulls a random GIF from GIPHY
+- Simple, responsive UI with Tailwind CSS
+- Small, focused codebase — great for learning
+
+## Prerequisites
+
+- Node.js 16–20
+- npm
+
+## Setup (local)
+
+1. Clone the repository and change into the project folder:
+
+```bash
+git clone <your-repo-url>
+cd Random-gif
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Add your GIPHY API key in a `.env` file at the project root:
+
+```
+REACT_APP_GIPHY_API_KEY=your_giphy_api_key_here
+```
+
+4. Run the development server:
+
+```bash
+npm start
+```
+
+5. Build for production:
+
+```bash
+npm run build
+```
+
+## Deploying to Vercel
+
+1. Push this repository to GitHub (or any Git provider) and connect it in the Vercel dashboard.
+2. In Vercel project settings, set the environment variable `REACT_APP_GIPHY_API_KEY` to your GIPHY key.
+3. Vercel build command: `npm run build` and output directory: `build` (these are the defaults for CRA).
+
+Important note: environment variables prefixed with `REACT_APP_` are embedded into the built client bundle. If you want to keep the GIPHY API key secret, proxy requests through a backend or serverless function (I can scaffold one for you).
+
+## Files you may want to edit
+
+- `src/hooks/useGif.js` — contains the GIF fetching logic.
+
+## Contributing
+
+PRs and suggestions welcome. If you add backend features or favorites storage, add appropriate `.env` keys and update `.gitignore`.
+
+## License
+
+This project is provided for learning and fun. Use or modify as you like.
+
+---
+
+## About the Creator
+
+Sahil Ittan (Jamiwal)
+
+I built this application for fun and to learn more about modern frontend development. This project demonstrates a small stack and quick iteration loop using React and Tailwind.
+
+- GitHub: https://github.com/Jamiwal-3704
+- LinkedIn: https://linkedin.com/in/sahilittan
+
+Technologies used in this project:
+
+- React.js (functional components, hooks)
+- Tailwind CSS for styling
+- axios for HTTP requests
+- GIPHY API for GIF data
+
+If you'd like, I can extend this project with a backend (Express) to store favorites and proxy the GIPHY key so it isn't exposed in the browser.
+
 # 🎬 Random GIF Generator
 
 A modern, interactive React application that generates random GIFs using the Giphy API. Easily browse through random GIFs or search for specific ones by entering custom tags.

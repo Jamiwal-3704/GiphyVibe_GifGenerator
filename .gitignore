@@ -21,3 +21,16 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# IDEs
+.vscode/
+.idea/
+
+# Vercel
+.vercel/
+
+# cache / local artifacts
+.cache/
+
+# Environment files
+.env
