@@ -1,4 +1,4 @@
-# GiphyVibe — Random GIF Generator
+# GifSpark — Random GIFs
 
 > A tiny, fun React app that fetches truly random GIFs from GIPHY. Built for learning, experimenting with modern frontend tooling, and sharing a smile.
 
@@ -64,7 +64,18 @@ npm run build
 2. In Vercel project settings, set the environment variable `REACT_APP_GIPHY_API_KEY` to your GIPHY key.
 3. Vercel build command: `npm run build` and output directory: `build` (these are the defaults for CRA).
 
-Important note: environment variables prefixed with `REACT_APP_` are embedded into the built client bundle. If you want to keep the GIPHY API key secret, proxy requests through a backend or serverless function (I can scaffold one for you).
+Vercel deployment (recommended — keeps key secret):
+
+1.  Push your repo to GitHub and connect it in Vercel.
+2.  In Vercel project settings → Environment Variables, add:
+    - `GIPHY_API_KEY` = your_giphy_api_key_here
+3.  Vercel will detect the project and build the frontend. We included a serverless API at `/api/gifs/random` which proxies GIPHY requests using `GIPHY_API_KEY` so the key is never exposed in the client.
+4.  Build command: `npm run build`, Output directory: `build` (CRA defaults).
+
+Quick notes:
+
+- If you prefer to deploy without the serverless API, set `REACT_APP_GIPHY_API_KEY` in Vercel (not recommended — key becomes public in the client bundle).
+- The included `/api/gifs/random` function will be available at `https://<your-deployment>/api/gifs/random` after deployment.
 
 ## Files you may want to edit
 
@@ -98,7 +109,7 @@ Technologies used in this project:
 
 If you'd like, I can extend this project with a backend (Express) to store favorites and proxy the GIPHY key so it isn't exposed in the browser.
 
-# 🎬 Random GIF Generator
+# 🎬 GifSpark — Random GIFs
 
 A modern, interactive React application that generates random GIFs using the Giphy API. Easily browse through random GIFs or search for specific ones by entering custom tags.
 
@@ -220,17 +231,38 @@ This will install all required packages listed in `package.json`:
    - Sign up or log in to your account
    - Create a new application to generate an API key
 
-2. **Add API Key to Environment File**:
-   - Open the `.env` file in the project root
-   - Update the `REACT_APP_GIPHY_API_KEY` variable:
+2. **Add API Key and choose run mode**:
 
-   ```env
-   REACT_APP_GIPHY_API_KEY=your_api_key_here
-   ```
+Option A — Recommended: run the local proxy server (keeps the key secret)
 
-   - Replace `your_api_key_here` with your actual Giphy API key
+- Copy `server/.env.example` to `server/.env` and set your key:
 
-⚠️ **Important**: Never commit your `.env` file to version control. It's already included in `.gitignore`.
+```
+GIPHY_API_KEY=your_giphy_api_key_here
+PORT=5000
+```
+
+- From project root start both servers (client + proxy):
+
+```bash
+npm run dev
+```
+
+Option B — Quick client-only fallback (key exposed in bundle)
+
+- Copy `.env.example` to `.env` at the project root and set:
+
+```
+REACT_APP_GIPHY_API_KEY=your_api_key_here
+```
+
+- Then run the frontend only:
+
+```bash
+npm start
+```
+
+⚠️ **Important**: Never commit `.env` or `server/.env` — they are included in `.gitignore`.
 
 ---
 

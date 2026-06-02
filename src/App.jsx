@@ -24,7 +24,7 @@ export default function App() {
         </p>
         <h1 className="font-display text-4xl font-extrabold tracking-tight text-white drop-shadow-sm sm:text-5xl md:text-6xl">
           <span className="bg-gradient-to-r from-brand-peach via-white to-brand-cyan bg-clip-text text-transparent">
-            Random GIFs
+            GifSpark
           </span>
         </h1>
         <p className="mx-auto mt-4 max-w-lg font-sans text-base leading-relaxed text-slate-400 sm:text-lg">

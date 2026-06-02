@@ -1,5 +1,5 @@
 {
-  "name": "random-gif",
+  "name": "gifspark",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,7 +36,8 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "concurrently": "^8.2.0"
   },
   "engines": {
     "node": ">=16 <=20"
